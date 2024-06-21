@@ -1,5 +1,7 @@
 package com.example.ManagementTeacher.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.ManagementTeacher.entity.Teacher;
@@ -23,6 +25,41 @@ public class TeacherServiceImpl implements TeacherService {
 	public Teacher login(String email, String passwordhas) {
 		// TODO Auto-generated method stub
 		return teachersRepository.findByEmailAndPasswordhas(email, passwordhas);
+	}
+
+
+	@Override
+	public List<Teacher> getAllTeacher() {
+		// TODO Auto-generated method stub
+		return teachersRepository.findAll();
+	}
+
+
+	@Override
+	public Teacher saveTeacher(Teacher teacher) {
+		// TODO Auto-generated method stub
+		return teachersRepository.save(teacher);
+	}
+
+
+	@Override
+	public Teacher getTeacherById(Long id) {
+		// TODO Auto-generated method stub
+		return teachersRepository.findById(id).get();
+	}
+
+
+	@Override
+	public Teacher updateTeacher(Teacher teacher) {
+		// TODO Auto-generated method stub
+		return teachersRepository.save(teacher);
+	}
+
+
+	@Override
+	public void deleteTeacherById(Long id) {
+		// TODO Auto-generated method stub
+		teachersRepository.deleteById(id);
 	}
 
 }

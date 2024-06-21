@@ -1,6 +1,7 @@
 package com.example.ManagementTeacher.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -84,7 +86,7 @@ public class Teacher {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = true)
 	private String name;
 	@Column(name = "onboard", nullable = false)
 	private Date onboard;
@@ -96,6 +98,10 @@ public class Teacher {
 	private String passwordhas;
 	@Column(name = "Role", nullable = false)
 	public int Role;
+	
+	@OneToMany(mappedBy = "teacher")
+    private List<Subjects> subjects;
+	
 //	@Column(name = "CreateBy", nullable = false)
 //	public String CreateBy;
 //	@Column(name = "CreateDate", nullable = false)

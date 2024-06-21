@@ -67,17 +67,7 @@
 							<a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
-								<!-- <span class="caret"></span> -->
 							</a>
-							<!-- <div class="collapse" id="dashboard">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="../../demo1/index.html">
-											<span class="sub-item">Dashboard 1</span>
-										</a>
-									</li>
-								</ul>
-							</div> -->
 						</li>
 						<li class="nav-section">
 							<span class="sidebar-mini-icon">
@@ -86,29 +76,27 @@
 							<h4 class="text-section">Chức năng</h4>
 						</li>
 						<li class="nav-item active submenu">
-							<a href="#base">
+							<a href="#">
 								<i class="fas fa-layer-group"></i>
-								<p>Quản lý trường học</p>
+								<p>Quản lý sinh viên</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="./area.html">
+							<a href="/ManagementFaculties">
 								<i class="fas fa-pen-square"></i>
-								<p>Quản lý khu vực</p>
+								<p>Quản lý khoa</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="./benchmark.html">
+							<a href="/ManageTeachers">
 								<i class="fas fa-table"></i>
-								<p>Quản lý điểm chuẩn</p>
+								<p>Quản lý giảng viên</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="./department.html">
-								<i class="fas fa-map-marker-alt"></i>
-								<p>Quản lý ngành nghề</p>
-							</a>
-						</li>
+						<li class="nav-item"><a href="/ManagementSubjects"> <i
+								class="fas fa-map-marker-alt"></i>
+								<p>Quản lý môn học</p>
+						</a></li>
 						<li class="nav-item">
 							<a href="./admission.html">
 								<i class="far fa-chart-bar"></i>
@@ -188,7 +176,7 @@
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="#">Account Setting</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item" href="#" onclick="LogOut()">Logout</a>
+											<a class="dropdown-item" href="#" onclick="logout()">Logout</a>
 										</li>
 									</div>
 								</ul>
@@ -205,14 +193,14 @@
                   <div class="card">
                     <div class="card-header">
                       <div class="d-flex align-items-center">
-                        <h4 class="card-title">Add Row</h4>
+                        <h4 class="card-title">Classes Managerment</h4>
                         <button
                           class="btn btn-primary btn-round ms-auto"
                           data-bs-toggle="modal"
                           data-bs-target="#addRowModal"
                         >
                           <i class="fa fa-plus"></i>
-                          Add Row
+                          Add new class
                         </button>
                       </div>
                     </div>
@@ -730,6 +718,29 @@
           $("#addRowModal").modal("hide");
         });
       });
+	</script>
+	<script>
+		const fullname = localStorage.getItem("name");
+	    const email = localStorage.getItem("email");
+	    if (fullname) {
+	        const nameElements = document.querySelectorAll("#fullnameDisplay");
+	        nameElements.forEach(element => {
+	            element.innerText = fullname;
+	        });
+	    }
+	
+	    if(email) {
+	        const nameElements = document.querySelectorAll("#emailDisplay");
+	        nameElements.forEach(element => {
+	            element.innerText = email;
+	        });
+	    }
+	    function logout() {
+            // Xóa hết thông tin trong Local Storage
+            localStorage.clear();
+            // Chuyển hướng đến endpoint /logout
+            window.location.href = '/logout';
+        }
 	</script>
 </body>
 </html>
