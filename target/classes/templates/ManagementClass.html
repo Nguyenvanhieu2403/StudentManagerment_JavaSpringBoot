@@ -226,35 +226,7 @@
 																<div class="form-group form-group-default">
 																	<label>Name</label> <input id="addName" name="Name"
 																		type="text" class="form-control"
-																		placeholder="Full Name" />
-																</div>
-															</div>
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label>DOB</label> <input id="addDob" name="Dob"
-																		type="text" class="form-control"
-																		placeholder="Date of birth" />
-																</div>
-															</div>
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label>Phone</label> <input id="addPhone" name="phone"
-																		type="text" class="form-control"
-																		placeholder="Phone number" />
-																</div>
-															</div>
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label>Gender</label> <input id="addGender" name="gender"
-																		type="text" class="form-control"
-																		placeholder="Gender" />
-																</div>
-															</div>
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label>Address</label> <input id="addAdress" name="address"
-																		type="text" class="form-control"
-																		placeholder="Address" />
+																		placeholder="fill name" />
 																</div>
 															</div>
 															<div class="col-sm-12">
@@ -269,9 +241,9 @@
 															
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label>Class</label> <select class="form-control"
+																	<label>Faculties</label> <select class="form-control"
 																		id="teacherSelect" name="idfaculty" required>
-																		<option th:each="teacher : ${Classes}"
+																		<option th:each="teacher : ${Faculties}"
 																			th:value="${teacher.Id}" th:text="${teacher.name}"></option>
 																	</select>
 																</div>
@@ -295,25 +267,17 @@
 												<tr>
 													<th>Id</th>
 													<th>Name</th>
-													<th>DOB</th>
-													<th>Phone</th>
-													<th>Gender</th>
-													<th>Address</th>
-													<th>Class</th>
 													<th>Teacher</th>
+													<th>Faculty</th>
 													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="Class: ${Students}" id="row-${Class.Id}">
+												<tr th:each="Class: ${Classes}" id="row-${Class.Id}">
 													<td th:text="${Class.Id}"></td>
-													<td th:text="${Class.name}"></td>
-													<td th:text="${Class.Dob}"></td>
-													<td th:text="${Class.phone}"></td>
-													<td th:text="${Class.gender}"></td>
-													<td th:text="${Class.Address}"></td>
-													<td th:text="${Class.studentClass.name}"></td>
+													<td th:text="${Class.Name}"></td>
 													<td th:text="${Class.teacher.name}"></td>
+													<td th:text="${Class.faculty.name}"></td>
 													<td>
 														<div class="form-button-action">
 															<button type="button"
@@ -358,38 +322,6 @@
 																						</div>
 																						<div class="col-sm-12">
 																							<div class="form-group form-group-default">
-																								<label>DOB</label> <input id="addDob"
-																									name="Name" type="text" class="form-control"
-																									th:value="${Class.Dob}"
-																									placeholder="fill name" />
-																							</div>
-																						</div>
-																						<div class="col-sm-12">
-																							<div class="form-group form-group-default">
-																								<label>Phone</label> <input id="addPhone"
-																									name="Name" type="text" class="form-control"
-																									th:value="${Class.phone}"
-																									placeholder="fill name" />
-																							</div>
-																						</div>
-																						<div class="col-sm-12">
-																							<div class="form-group form-group-default">
-																								<label>Gender</label> <input id="addGender"
-																									name="Name" type="text" class="form-control"
-																									th:value="${Class.gender}"
-																									placeholder="fill name" />
-																							</div>
-																						</div>
-																						<div class="col-sm-12">
-																							<div class="form-group form-group-default">
-																								<label>Address</label> <input id="addAddress"
-																									name="Name" type="text" class="form-control"
-																									th:value="${Class.Address}"
-																									placeholder="fill name" />
-																							</div>
-																						</div>
-																						<div class="col-sm-12">
-																							<div class="form-group form-group-default">
 																								<label>Teacher</label> 
 																								<select class="form-control" id="teacherSelect" name="idteacher" required>
 																				                    <option th:each="teacher : ${Teachers}" th:value="${teacher.id}" th:text="${teacher.name}"
@@ -400,9 +332,9 @@
 																						
 																						<div class="col-sm-12">
 																							<div class="form-group form-group-default">
-																								<label>Class</label> 
+																								<label>faculties</label> 
 																								<select class="form-control" id="teacherSelect" name="idfaculty" required>
-																				                    <option th:each="teacher : ${Classes}" th:value="${teacher.Id}" th:text="${teacher.name}"
+																				                    <option th:each="teacher : ${Faculties}" th:value="${teacher.Id}" th:text="${teacher.name}"
 																				                            th:selected="${teacher.Id} == ${Class.idteacher}"></option>
 																				                </select>
 																							</div>
@@ -422,7 +354,7 @@
 															<a type="button" data-bs-toggle="tooltip" title=""
 																class="btn btn-link btn-danger"
 																data-original-title="Remove"
-																th:href="@{/ManagementClass/{id}(id=${Class.Id})}">
+																th:href="@{/ManagementStudents/{id}(id=${Students.Id})}">
 																<i class="fa fa-times"></i>
 															</a>
 														</div>

@@ -11,5 +11,6 @@ public interface TeacherService {
 	Teacher saveTeacher(Teacher teacher);
 	Teacher getTeacherById(Long id);
 	Teacher updateTeacher(Teacher teacher);
+	Teacher register(Teacher teacher);
 	void deleteTeacherById(Long id);
 }

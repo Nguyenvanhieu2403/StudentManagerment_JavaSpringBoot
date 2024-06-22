@@ -26,6 +26,7 @@ public class TeacherServiceImpl implements TeacherService {
 		// TODO Auto-generated method stub
 		return teachersRepository.findByEmailAndPasswordhas(email, passwordhas);
 	}
+	
 
 
 	@Override
@@ -61,5 +62,13 @@ public class TeacherServiceImpl implements TeacherService {
 		// TODO Auto-generated method stub
 		teachersRepository.deleteById(id);
 	}
+	
+	@Override
+    public Teacher register(Teacher teacher) {
+        if (!teachersRepository.existsByEmail(teacher.getEmail())) {
+            return teachersRepository.save(teacher);
+        }
+        return null;
+    }
 
 }

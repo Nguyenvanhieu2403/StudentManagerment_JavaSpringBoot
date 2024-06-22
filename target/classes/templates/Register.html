@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link 
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+	rel="stylesheet" 
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+	crossorigin="anonymous"
+>
+<script>
+        async function handleRegister(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const passwordHas = document.getElementById('passwordhas').value;
+
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&password=${encodeURIComponent(password)}&passwordhas=${encodeURIComponent(passwordHas)}`
+            });
+            if (response.ok) {
+            	const data = await response.json();
+                window.location.href = '/';
+            }
+
+            if (!response.ok) {
+            	const error = await response.json();
+                document.getElementById('error').textContent = error.error;
+            }
+            
+        }
+    </script>
+</head>
+<body>
+	<div class="container">
+		<section class="vh-100">
+		  <div class="container-fluid h-custom  mt-5 mb-5">
+		    <div class="row d-flex justify-content-center align-items-center h-100">
+		      <div class="col-md-9 col-lg-6 col-xl-5">
+		        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+		          class="img-fluid" alt="Sample image">
+		      </div>
+		      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+		        <form id="registerForm" onsubmit="handleRegister(event)">
+		          <div class="d-flex flex-row align-items-center justify-content-center">
+		            <p class="lead fw-normal mb-4 me-3">Register</p>
+		          </div>
+		          
+		          <!-- Name input -->
+		          <div data-mdb-input-init class="form-outline mb-3">
+		          	<label class="form-label" for="form3Example3">Full Name</label>
+		            <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter fullname" required />
+		          </div>
+		
+		          <!-- Email input -->
+		          <div data-mdb-input-init class="form-outline mb-3">
+		          	<label class="form-label" for="form3Example3">Email</label>
+		            <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required />
+		          </div>
+		
+		          <!-- Password input -->
+		          <div data-mdb-input-init class="form-outline mb-3">
+		          <label class="form-label" for="form3Example4">Password</label>
+		             <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Enter password" required />
+		          </div>
+		          
+		          <!-- Confirm password input -->
+		          <div data-mdb-input-init class="form-outline mb-3">
+		          <label class="form-label" for="form3Example4">Confirm password</label>
+		            <input type="password" id="passwordhas" name="passwordhas" class="form-control form-control-lg" placeholder="Enter confirm password" required />
+		          </div>
+		          
+		          <!-- Confirm password input -->
+		          <div data-mdb-input-init class="form-outline mb-3">
+		          <label class="form-label" for="form3Example4">Phone</label>
+		            <input type="text" id="phone" name="phone" class="form-control form-control-lg" placeholder="Enter phone number" required />
+		          </div>
+		
+		          <div class="text-center mt-4 pt-2">
+		            <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+		              style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+		            <p class="small fw-bold mt-3 pt-1 mb-0">I already have an account <a href="login2"
+		                class="link-danger">Login</a></p>
+		          </div>
+					<div id="error" class="text-danger mt-3"></div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</section>
+	</div>
+	
+</body>
+
+</html>
