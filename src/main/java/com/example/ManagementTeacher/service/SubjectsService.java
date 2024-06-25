@@ -11,4 +11,5 @@ public interface SubjectsService {
 	Subjects getSubjectsById(Long id);
 	Subjects updateSubjects(Subjects Subjects);
 	void deleteSubjectsById(Long id);
+//	Subjects getSubjectsByName(String name);
 }

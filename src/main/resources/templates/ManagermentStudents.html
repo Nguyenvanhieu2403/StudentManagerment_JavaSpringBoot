@@ -96,6 +96,10 @@
 								class="far fa-chart-bar"></i>
 								<p>Quản lý tuyển sinh</p>
 						</a></li>
+						<li class="nav-item"><a href="/ManagementScores"> <i
+								class="fas fa-file"></i>
+								<p>Quản lý điểm sinh viên</p>
+						</a></li>
 					</ul>
 				</div>
 			</div>
@@ -194,10 +198,10 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Class Managerment</h4>
+										<h4 class="card-title">Student Managerment</h4>
 										<button class="btn btn-primary btn-round ms-auto"
 											data-bs-toggle="modal" data-bs-target="#addRowModal">
-											<i class="fa fa-plus"></i> Add new class
+											<i class="fa fa-plus"></i> Add new student
 										</button>
 									</div>
 								</div>
@@ -210,7 +214,7 @@
 												<div class="modal-header border-0">
 													<h5 class="modal-title">
 														<span class="fw-mediumbold"> New</span> <span
-															class="fw-light"> Class </span>
+															class="fw-light"> Student </span>
 													</h5>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
@@ -220,7 +224,7 @@
 												<div class="modal-body">
 													<p class="small">Create a new row using this form, make
 														sure you fill them all</p>
-													<form th:action="@{/ManagementClass/Save}" method="POST">
+													<form th:action="@{/ManagementStudents/Save}" method="POST">
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
@@ -270,7 +274,7 @@
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
 																	<label>Class</label> <select class="form-control"
-																		id="teacherSelect" name="idfaculty" required>
+																		id="teacherSelect" name="idclass" required>
 																		<option th:each="teacher : ${Classes}"
 																			th:value="${teacher.Id}" th:text="${teacher.name}"></option>
 																	</select>
@@ -401,7 +405,7 @@
 																						<div class="col-sm-12">
 																							<div class="form-group form-group-default">
 																								<label>Class</label> 
-																								<select class="form-control" id="teacherSelect" name="idfaculty" required>
+																								<select class="form-control" id="teacherSelect" name="idclass" required>
 																				                    <option th:each="teacher : ${Classes}" th:value="${teacher.Id}" th:text="${teacher.name}"
 																				                            th:selected="${teacher.Id} == ${Class.idteacher}"></option>
 																				                </select>
@@ -422,7 +426,7 @@
 															<a type="button" data-bs-toggle="tooltip" title=""
 																class="btn btn-link btn-danger"
 																data-original-title="Remove"
-																th:href="@{/ManagementClass/{id}(id=${Class.Id})}">
+																th:href="@{/ManagementStudents/{id}(id=${Students.Id})}">
 																<i class="fa fa-times"></i>
 															</a>
 														</div>

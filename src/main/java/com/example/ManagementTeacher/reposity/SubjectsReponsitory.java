@@ -9,5 +9,5 @@ import com.example.ManagementTeacher.entity.Subjects;
 import com.example.ManagementTeacher.entity.Teacher;
 
 public interface SubjectsReponsitory extends JpaRepository<Subjects, Long> {
-	
+//	Subjects findByName(String name);
 }

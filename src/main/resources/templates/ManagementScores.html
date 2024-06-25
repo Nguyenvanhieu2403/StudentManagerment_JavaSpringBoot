@@ -23,6 +23,7 @@
 			sessionStorage.fonts = true;
 		}
 	});
+	
 </script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -198,10 +199,10 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Class Managerment</h4>
+										<h4 class="card-title">Score Managerment</h4>
 										<button class="btn btn-primary btn-round ms-auto"
 											data-bs-toggle="modal" data-bs-target="#addRowModal">
-											<i class="fa fa-plus"></i> Add new class
+											<i class="fa fa-plus"></i> Add new score for student
 										</button>
 									</div>
 								</div>
@@ -214,7 +215,7 @@
 												<div class="modal-header border-0">
 													<h5 class="modal-title">
 														<span class="fw-mediumbold"> New</span> <span
-															class="fw-light"> Class </span>
+															class="fw-light"> Subjects </span>
 													</h5>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
@@ -224,31 +225,69 @@
 												<div class="modal-body">
 													<p class="small">Create a new row using this form, make
 														sure you fill them all</p>
-													<form th:action="@{/ManagementClass/Save}" method="POST">
+													<form th:action="@{/ManagementScores/Save}" method="POST">
 														<div class="row">
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
-																	<label>Name</label> <input id="addName" name="Name"
+																	<label>Student's Name</label> <select class="form-control"
+																		id="idstudent" name="idstudent" required>
+																		<option th:each="teacher : ${Students}"
+																			th:value="${teacher.id}" th:text="${teacher.name}"></option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label>Subject</label> <select class="form-control"
+																		id="idsubject" name="idsubject" required>
+																		<option th:each="teacher : ${Subjects}"
+																			th:value="${teacher.id}" th:text="${teacher.name}"></option>
+																	</select>
+																</div>
+															</div>
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label>AttendanceScore</label> <input id="attendancescoreadd" name="attendancescore"
 																		type="text" class="form-control"
 																		placeholder="fill name" />
 																</div>
 															</div>
 															<div class="col-sm-12">
 																<div class="form-group form-group-default">
+																	<label>MidtermScore</label> <input id="midtermscoreadd" name="midtermscore"
+																		type="text" class="form-control"
+																		placeholder="fill name" />
+																</div>
+															</div>
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label>FinalScore</label> <input id="finalscoreadd" name="finalscore"
+																		type="text" class="form-control"
+																		placeholder="fill name" />
+																</div>
+															</div>
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label>AverageScores</label> <input id="averagescoreadd" name="averagescore"
+																		type="text" class="form-control"
+																		placeholder="fill name" />
+																</div>
+															</div>
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
+																	<label>Term</label> <input id="term" name="term"
+																		type="text" class="form-control"
+																		placeholder="fill name" />
+																</div>
+															</div>
+
+															
+															<div class="col-sm-12">
+																<div class="form-group form-group-default">
 																	<label>Teacher</label> <select class="form-control"
 																		id="teacherSelect" name="idteacher" required>
 																		<option th:each="teacher : ${Teachers}"
 																			th:value="${teacher.id}" th:text="${teacher.name}"></option>
-																	</select>
-																</div>
-															</div>
-															
-															<div class="col-sm-12">
-																<div class="form-group form-group-default">
-																	<label>Faculties</label> <select class="form-control"
-																		id="teacherSelect" name="idfaculty" required>
-																		<option th:each="teacher : ${Faculties}"
-																			th:value="${teacher.Id}" th:text="${teacher.name}"></option>
 																	</select>
 																</div>
 															</div>
@@ -270,24 +309,34 @@
 											<thead>
 												<tr>
 													<th>Id</th>
-													<th>Name</th>
+													<th>Student's Name</th>
+													<th>Subject</th>
+													<th>AttendanceScore</th>
+													<th>MidtermScore</th>
+													<th>FinalScore</th>
+													<th>AverageScore</th>
+													<th>Term</th>
 													<th>Teacher</th>
-													<th>Faculty</th>
 													<th style="width: 10%">Action</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr th:each="Class: ${Classes}" id="row-${Class.Id}">
-													<td th:text="${Class.Id}"></td>
-													<td th:text="${Class.Name}"></td>
-													<td th:text="${Class.teacher.name}"></td>
-													<td th:text="${Class.faculty.name}"></td>
+												<tr th:each="Scores: ${Scores}" id="row-${Scores.Id}">
+													<td th:text="${Scores.Id}"></td>
+													<td th:text="${Scores.student.name}"></td>
+													<td th:text="${Scores.subject.name}"></td>
+													<td th:text="${Scores.attendancescore}"></td>
+													<td th:text="${Scores.midtermscore}"></td>
+													<td th:text="${Scores.finalscore}"></td>
+													<td th:text="${Scores.averagescore}"></td>
+													<td th:text="${Scores.term}"></td>
+													<td th:text="${Scores.teacher.name}"></td>
 													<td>
 														<div class="form-button-action">
 															<button type="button"
 																class="btn btn-link btn-primary btn-lg"
 																data-original-title="Edit Task"
-																th:data-bs-target="'#editRowModal' + ${Class.Id}"
+																th:data-bs-target="'#editRowModal' + ${Scores.Id}"
 																data-toggle="tooltip" title="Edit Faculty"
 																data-placement="bottom" data-bs-toggle="modal">
 																<i class="fa fa-edit"></i>
@@ -295,14 +344,14 @@
 															<div class="card-body">
 																<!-- Modal -->
 																<div class="modal fade"
-																	th:id=" 'editRowModal' + ${Class.Id}" tabindex="-1"
+																	th:id=" 'editRowModal' + ${Scores.Id}" tabindex="-1"
 																	role="dialog" aria-hidden="true">
 																	<div class="modal-dialog" role="document">
 																		<div class="modal-content">
 																			<div class="modal-header border-0">
 																				<h5 class="modal-title">
 																					<span class="fw-mediumbold"> Edit</span> <span
-																						class="fw-light"> Class </span>
+																						class="fw-light"> Scores </span>
 																				</h5>
 																				<button type="button" class="close"
 																					data-dismiss="modal" aria-label="Close">
@@ -313,33 +362,76 @@
 																				<p class="small">Create a new row using this
 																					form, make sure you fill them all</p>
 																				<form
-																					th:action="@{/ManagementClass/edit/{id} (id=${Class.Id})}"
-																					th:object="${Class}" method="POST">
+																					th:action="@{/ManagementScores/edit/{id} (id=${Scores.Id})}"
+																					th:object="${Scores}" method="POST">
 																					<div class="row">
+																						
 																						<div class="col-sm-12">
 																							<div class="form-group form-group-default">
-																								<label>Name</label> <input id="addName"
-																									name="Name" type="text" class="form-control"
-																									th:value="${Class.Name}"
+																								<label>Student's Name</label>
+																								<input id="idstudent"
+																									name="idstudent" type="text" class="form-control"
+																									th:value="${Scores.idstudent}"
+																									placeholder="fill name" hidden/>
+																								<input type="text" class="form-control" th:value="${Scores.student.name}" readonly>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Subject</label>
+																								<input id="idsubject"
+																									name="idsubject" type="text" class="form-control"
+																									th:value="${Scores.idsubject}"
+																									placeholder="fill name" hidden />
+																								<input type="text" class="form-control" th:value="${Scores.subject.name}" readonly>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>AttendanceScore</label> <input id="attendancescore"
+																									name="attendancescore" type="number" class="form-control"
+																									th:value="${Scores.attendancescore}"
+																									placeholder="fill name"/>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>MidtermScore</label> <input id="midtermscore"
+																									name="midtermscore" type="number" class="form-control"
+																									th:value="${Scores.midtermscore}"
+																									placeholder="fill name"/>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>FinalScore</label> <input id="finalscore"
+																									name="finalscore" type="number" class="form-control"
+																									th:value="${Scores.finalscore}"
+																									placeholder="fill name"/>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>AverageScore</label>
+																						        <input id="averagescore" name="averagescore" type="number" class="form-control"
+																						               th:value="${(Scores.attendancescore * 0.1) + (Scores.midtermscore * 0.2) + (Scores.finalscore * 0.7)}"
+																						               placeholder="fill name"readonly/>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Term</label> <input id="term"
+																									name="term" type="text" class="form-control"
+																									th:value="${Scores.term}"
 																									placeholder="fill name" />
 																							</div>
 																						</div>
 																						<div class="col-sm-12">
 																							<div class="form-group form-group-default">
 																								<label>Teacher</label> 
-																								<select class="form-control" id="teacherSelect" name="idteacher" required>
+																								<select class="form-control" id="teacherSelect" name="idteacher"  required>
 																				                    <option th:each="teacher : ${Teachers}" th:value="${teacher.id}" th:text="${teacher.name}"
-																				                            th:selected="${teacher.id} == ${Class.idteacher}"></option>
-																				                </select>
-																							</div>
-																						</div>
-																						
-																						<div class="col-sm-12">
-																							<div class="form-group form-group-default">
-																								<label>faculties</label> 
-																								<select class="form-control" id="teacherSelect" name="idfaculty" required>
-																				                    <option th:each="teacher : ${Faculties}" th:value="${teacher.Id}" th:text="${teacher.name}"
-																				                            th:selected="${teacher.Id} == ${Class.idteacher}"></option>
+																				                            th:selected="${teacher.id} == ${Scores.idteacher}"></option>
 																				                </select>
 																							</div>
 																						</div>
@@ -358,7 +450,7 @@
 															<a type="button" data-bs-toggle="tooltip" title=""
 																class="btn btn-link btn-danger"
 																data-original-title="Remove"
-																th:href="@{/ManagementClass/{id}(id=${Class.Id})}">
+																th:href="@{/ManagementScores/{id}(id=${Scores.Id})}">
 																<i class="fa fa-times"></i>
 															</a>
 														</div>
@@ -546,6 +638,28 @@
             // Chuyển hướng đến endpoint /logout
             window.location.href = '/logout';
         }
+	   
+	    document.addEventListener('DOMContentLoaded', function() {
+            const attendanceScoreInput = document.getElementById('attendancescoreadd');
+            const midtermScoreInput = document.getElementById('midtermscoreadd');
+            const finalScoreInput = document.getElementById('finalscoreadd');
+            const averageScoreInput = document.getElementById('averagescoreadd');
+
+            function calculateAverageScore() {
+                const attendanceScore = parseFloat(attendanceScoreInput.value) || 0;
+                const midtermScore = parseFloat(midtermScoreInput.value) || 0;
+                const finalScore = parseFloat(finalScoreInput.value) || 0;
+
+                const averageScore = (attendanceScore * 0.1) + (midtermScore * 0.2) + (finalScore * 0.7);
+                averageScoreInput.value = averageScore.toFixed(2);
+            }
+
+            attendanceScoreInput.addEventListener('input', calculateAverageScore);
+            midtermScoreInput.addEventListener('input', calculateAverageScore);
+            finalScoreInput.addEventListener('input', calculateAverageScore);
+            
+           
+        });
 	</script>
 </body>
 </html>

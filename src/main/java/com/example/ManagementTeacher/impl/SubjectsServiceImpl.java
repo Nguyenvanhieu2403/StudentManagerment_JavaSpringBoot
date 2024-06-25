@@ -48,6 +48,9 @@ public class SubjectsServiceImpl implements SubjectsService {
 		this.subjectsReponsitory = subjectsReponsitory;
 	}
 	
-	
+//	@Override
+//    public Subjects getSubjectsByName(String name) {
+//        return subjectsReponsitory.findByName(name);
+//    }
 
 }

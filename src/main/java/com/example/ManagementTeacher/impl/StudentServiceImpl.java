@@ -48,6 +48,9 @@ public class StudentServiceImpl implements StudentService {
 		this.studentReponsitory = subjectsReponsitory;
 	}
 	
-	
+//	@Override
+//    public Student getStudentByName(String name) {
+//        return studentReponsitory.findByName(name);
+//    }
 
 }
